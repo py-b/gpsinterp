@@ -1,0 +1,26 @@
+Package: interpolexif
+Type: Package
+Title: Interpolation of Longitude, Latitude and Direction with JOSM
+Version: 0.1.0
+Authors@R:
+    person(
+	  "Pierre-Yves", "Berrard",
+	  email = "pierre.yves.berrard@gmail.com",
+	  role = c("aut", "cre")
+	)
+Depends: R (>= 3.3)
+Imports:
+    dplyr,
+    purrr,
+    tibble,
+    tidyr,
+	xml2
+Suggests : testthat
+Description:
+    Finds coordinates and direction (angle) of a sequence of photos with no GPS
+	exif tags. In JOSM (Java editor for OpenStreetMap), manually identify points
+	that can be located exactly, then interpolate in-between points with R.  
+	Repeat the procedure until the approximation is good enough.	
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
