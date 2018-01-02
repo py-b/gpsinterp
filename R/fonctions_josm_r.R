@@ -1,6 +1,11 @@
 # OSM -> R ----------------------------------------------------------------
 
 #' @importFrom dplyr "%>%"
+#' @importFrom xml2 xml_attr
+#' @importFrom xml2 xml_find_all
+#' @importFrom xml2 xml_attrs
+#' @importFrom xml2 read_xml
+#' @importFrom xml2 write_xml
 
 extract_node_info <- function(xml_node) {
 
@@ -9,8 +14,8 @@ extract_node_info <- function(xml_node) {
     xml_find_all(".//tag") %>%
     xml_attrs() %>%
     do.call(rbind, .) %>%
-    as.tibble() %>%
-    deframe()
+    tibble::as.tibble() %>%
+    tibble::deframe()
 
   list(
     PHOTO = tags[["name"]],
@@ -27,12 +32,12 @@ read_positions <- function(osm_file) {
   read_xml(osm_file) %>%
   xml_find_all("//node") %>%
   map(extract_node_info) %>%
-  transpose() %>%
+  purrr::transpose() %>%
   map(unlist) %>%
-  as.tibble() %>%
-  mutate_at(c("LAT", "LON"), as.numeric) %>%
-  replace_na(list(EXACT = FALSE, ACTION = "")) %>%
-  mutate(
+  tibble::as.tibble() %>%
+  dplyr::mutate_at(c("LAT", "LON"), as.numeric) %>%
+  tidyr::replace_na(list(EXACT = FALSE, ACTION = "")) %>%
+  dplyr::mutate(
     EXACT = ifelse(ACTION == "modify", TRUE, EXACT)
   )
 
@@ -61,7 +66,7 @@ df_to_osm <- function(df, file) {
 
   xml_inner <-
     df %>%
-    transmute(
+    dplyr::transmute(
       TXT =
         line_to_nodev(
           id = seq(nrow(.)),
