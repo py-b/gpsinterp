@@ -6,7 +6,6 @@
 #' @importFrom xml2 xml_attrs
 #' @importFrom xml2 read_xml
 #' @importFrom xml2 write_xml
-#' @export
 
 extract_node_info <- function(xml_node) {
 
@@ -28,7 +27,6 @@ extract_node_info <- function(xml_node) {
 
 }
 
-#' @export
 read_positions <- function(osm_file) {
 
   read_xml(osm_file) %>%
