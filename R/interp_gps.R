@@ -21,11 +21,12 @@ interp_init <- function(path = ".") {
     paste0(
       nrow(res), " images found in \"",
       normalizePath(path, winslash = "/"), "/input/photos\"\n",
-      " - First : ", res$PHOTO[1], "\n",
-      " - Last  : ", res$PHOTO[nrow(res)], "\n",
-      "Now, open JOSM. In a new layer, create at least two nodes :\n",
-      "the first and last image filename (in \"name\" attribute).\n",
-      "Save as \"input/approx.osm\"."
+      " In JOSM, create a new layer and add (at least) two nodes :\n",
+      " the first image (", res$PHOTO[1], ") and the last (",
+      res$PHOTO[nrow(res)], ")\n",
+      " with above filenames in the \"name\" attribute.\n",
+      " Save as \"input/approx.osm\".\n",
+      " Then run \"interp_gps()\" as many times as needed."
     )
   )
 
