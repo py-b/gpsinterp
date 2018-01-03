@@ -1,3 +1,5 @@
+# INITIALIZE --------------------------------------------------------------
+
 #' @export
 interp_init <- function(path = ".") {
 
@@ -40,6 +42,9 @@ init_check <- function(path = ".") {
   if (!exists(".exif", envir = .GlobalEnv)) stop(msg)
   if (!exists("images", envir = .exif)) stop(msg)
 }
+
+
+# INTERMEDIATE FUNCTIONS --------------------------------------------------
 
 read_exact <- function(path = ".") {
 
@@ -90,12 +95,18 @@ update_osm <- function(path = ".") {
 
 }
 
+
+# READ & UPDATE -----------------------------------------------------------
+
 #' @export
 interp_gps <- function(path = ".") {
   read_exact(path)
   interp_missing_coord()
   update_osm(path)
 }
+
+
+# CLEAN UP ----------------------------------------------------------------
 
 #' @export
 interp_cleanup <- function() {
