@@ -1,5 +1,5 @@
 #' @export
-list_images <- function(path = ".") {
+init <- function(path = ".") {
 
   # list images in "input"
   res <-
@@ -22,21 +22,22 @@ list_images <- function(path = ".") {
     )
   )
 
-  # stores images list in temporary environment
-  # tmp_env <- new.env()
-  # assign("images", res, envir = tmp_env)
+  # stores images list in newly created temporary environment
+  assign(".exif", new.env(), envir = .GlobalEnv)
+  .exif$images <- res
 
-  res
+  invisible()
 
 }
 
 #' @export
 read_exact <- function(path = ".") {
 
-  read_positions(
-    file.path(path, "input", "approx.osm")
-  ) %>%
-  dplyr::filter(EXACT)
+  res <-
+    read_positions(file.path(path, "input", "approx.osm")) %>%
+    dplyr::filter(EXACT)
+
+  .exif$approx <- res
 
 }
 
@@ -44,8 +45,8 @@ read_exact <- function(path = ".") {
 update_osm <- function(path = ".") {
 
   # reads new exact positions and interpolates NAs
-  base <-
-    dplyr::left_join(images, approx, by = "PHOTO") %>%
+  .exif$base <-
+    dplyr::left_join(.exif$images, .exif$approx, by = "PHOTO") %>%
     tidyr::replace_na(list(EXACT = FALSE)) %>%
     dplyr::mutate_at(
       c("LON", "LAT"),
@@ -54,7 +55,7 @@ update_osm <- function(path = ".") {
 
   # update "approx.osm"
   approx_file <- file.path(path, "input", "approx.osm")
-  base %>% df_to_osm(approx_file)
+  .exif$base %>% df_to_osm(approx_file)
 
   # opens "approx.osm" in JOSM
   file_josm <- approx_file %>% normalizePath(winslash = "/")
@@ -66,13 +67,13 @@ update_osm <- function(path = ".") {
   )
   unlink("ok.txt")
 
-  base
+  invisible()
 
 }
 
 
-# images <- list_images("..")
+# init("..")
 
-# approx <- read_exact("..")
-# base <- update_osm("..")
+# read_exact("..")
+# update_osm("..")
 
