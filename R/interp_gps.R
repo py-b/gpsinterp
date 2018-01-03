@@ -39,7 +39,7 @@ interp_init <- function(path = ".") {
 }
 
 init_check <- function(path = ".") {
-  msg <- "first initialize with init()."
+  msg <- "first initialize with interp_init()."
   if (!exists(".exif", envir = .GlobalEnv)) stop(msg)
   if (!exists("images", envir = .exif)) stop(msg)
 }
