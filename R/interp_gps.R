@@ -1,5 +1,5 @@
 #' @export
-init <- function(path = ".") {
+interp_init <- function(path = ".") {
 
   # list images in "input"
   res <-
@@ -53,7 +53,7 @@ read_exact <- function(path = ".") {
 
 }
 
-update_osm <- function(path = ".") {
+interp_missing_coord <- function() {
 
   init_check()
 
@@ -65,6 +65,12 @@ update_osm <- function(path = ".") {
       c("LON", "LAT"),
       fill_lin_full
     )
+
+}
+
+update_osm <- function(path = ".") {
+
+  init_check()
 
   # update "approx.osm"
   approx_file <- file.path(path, "input", "approx.osm")
@@ -87,8 +93,11 @@ update_osm <- function(path = ".") {
 #' @export
 interp_gps <- function(path = ".") {
   read_exact(path)
+  interp_missing_coord()
   update_osm(path)
 }
 
-# init("..")
-# interp_gps("..")
+#' @export
+interp_cleanup <- function() {
+  if (exists(".exif", envir = .GlobalEnv)) rm(.exif, envir = .GlobalEnv)
+}
