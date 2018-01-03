@@ -10,6 +10,11 @@ init <- function(path = ".") {
       )
     )
 
+  if (nrow(res) == 0) {
+    warning("no data in input/photos.")
+    return(NULL)
+  }
+
   message(
     paste0(
       nrow(res), " images found in \"",
@@ -30,8 +35,15 @@ init <- function(path = ".") {
 
 }
 
-#' @export
+init_check <- function(path = ".") {
+  msg <- "first initialize with init()."
+  if (!exists(".exif", envir = .GlobalEnv)) stop(msg)
+  if (!exists("images", envir = .exif)) stop(msg)
+}
+
 read_exact <- function(path = ".") {
+
+  init_check()
 
   res <-
     read_positions(file.path(path, "input", "approx.osm")) %>%
@@ -41,8 +53,9 @@ read_exact <- function(path = ".") {
 
 }
 
-#' @export
 update_osm <- function(path = ".") {
+
+  init_check()
 
   # reads new exact positions and interpolates NAs
   .exif$base <-
@@ -71,9 +84,11 @@ update_osm <- function(path = ".") {
 
 }
 
+#' @export
+interp_gps <- function(path = ".") {
+  read_exact(path)
+  update_osm(path)
+}
 
 # init("..")
-
-# read_exact("..")
-# update_osm("..")
-
+# interp_gps("..")
