@@ -1,6 +1,28 @@
 # INITIALIZE --------------------------------------------------------------
 
+#' Initialize data before interpolation
+#'
+#' List photos in input directory and creates an environment for storing
+#' data during interpolation iterative process. This is a mandatory prerequisite
+#' for interpolating positions.
+#'
+#' Search for image files in \code{input/photo} and stores them in a data.frame.
+#'
+#' As the process is iterative (a succession of manual modifications in
+#' JOSM and interpolations in R), it is necessary to keep track of
+#' intermediate results. Therefore, a temporary environment (named .exif)
+#' is created.
+#'
+#' Once interpolation is over, it is possible to delete that environment
+#' with \code{\link{interp_cleanup}}.
+#'
+#' @param path (optional) path where input and output are located.
+#'   This is not necessary if the working directory is already set to
+#'   that location.
+#' @return Nothing. Only \code{.exif$base} is created.
+#' @examples interp_init()
 #' @export
+
 interp_init <- function(path = ".") {
 
   # list images in "input"
@@ -74,6 +96,7 @@ interp_missing_coord <- function() {
 
 }
 
+#' @importFrom utils download.file
 update_osm <- function(path = ".") {
 
   init_check()
@@ -99,8 +122,22 @@ update_osm <- function(path = ".") {
 
 # READ & UPDATE -----------------------------------------------------------
 
+#' Interpolation and JOSM update
+#'
+#' Reads exact positions, linearly interpolates non-exact positions,
+#' updates osm file and displays it in JOSM.
+#'
+#' Reads \code{approx.osm} and detects exact locations (moved manually in JOSM).
+#' Then interpotales linearly other points. Updates \code{approx.osm} and
+#' opens it in JOSM (http://localhost:8111 is used to open the file in JOSM,
+#' which must be opened beforehand).
+#'
+#' @inheritParams interp_init
+#' @return Nothing. Only \code{.exif$base} and \code{approx.osm} are updated.
+#' @examples # interp_josm()
 #' @export
-interp_gps <- function(path = ".") {
+
+interp_josm <- function(path = ".") {
   read_exact(path)
   interp_missing_coord()
   update_osm(path)
@@ -109,7 +146,16 @@ interp_gps <- function(path = ".") {
 
 # CLEAN UP ----------------------------------------------------------------
 
+#' Clean up after interpolation
+#'
+#' Removes temporary environment (.exif) containing data that was used
+#' during interpolation.
+#'
+#' As closing R session will also delete that environment,
+#' this is not mandatory.
+#'
 #' @export
+#'
 interp_cleanup <- function() {
   if (exists(".exif", envir = .GlobalEnv)) rm(.exif, envir = .GlobalEnv)
 }
