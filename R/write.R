@@ -14,10 +14,11 @@ add_direction <- function() {
 
 #' Create a batch file for exiftool
 #'
-#' Create a batch file that contains exiftool commands to write computed
-#' longitudes, latitudes (and directions) in image files.
+#' Create a batch file that contains \href{https://sno.phy.queensu.ca/~phil/exiftool/}{exiftool}
+#' commands to write computed longitudes, latitudes (and directions) in image
+#' files.
 #'
-#' In order to execute the batch file created by that function, exiftool
+#' In order to execute the batch file created by that function, \strong{exiftool}
 #' must be installed.
 #'
 #' Files are not overwritten : a copy of the images including new exif tags
