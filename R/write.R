@@ -12,7 +12,23 @@ add_direction <- function() {
 
 # EXPORT pour EXIFTOOL ----------------------------------------------------
 
+#' Create a batch file for exiftool
+#'
+#' Create a batch file that contains exiftool commands to write computed
+#' longitudes, latitudes (and directions) in image files.
+#'
+#' In order to execute the batch file created by that function, exiftool
+#' must be installed.
+#'
+#' Files are not overwritten : a copy of the images including new exif tags
+#' are written in the \code{output} directory.
+#'
+#' @param file the name of the batch file (default : "write_exiftool.bat")
+#' @param direction should direction to next photo be calculated and included
+#'   in the file?
+#' @inheritParams interp_josm
 #' @export
+
 write_exiftool_bat <- function(path = ".",
                                file = "write_exiftool.bat",
                                direction = TRUE) {
@@ -39,7 +55,17 @@ write_exiftool_bat <- function(path = ".",
 
 # EXPORT CSV --------------------------------------------------------------
 
+#' Write coordinates and direction in a csv file.
+#'
+#' Write computed longitudes, latitudes (and directions) in a csv file.
+#' Images are not modified.
+#'
+#' @inheritParams write_exiftool_bat
+#' @param file the name of the csv file (default : "interp_gps.csv")
+#' @param ... other arguments passed to \code{write.csv}
 #' @export
+#' @importFrom utils write.csv
+
 write_coord_csv <- function(path = ".",
                             file = "interp_gps.csv",
                             direction = TRUE,
