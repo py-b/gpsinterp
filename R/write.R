@@ -51,12 +51,13 @@ write_exiftool <- function(path = ".",
       )
     )
 
-  bat <- file.path(path, file)
-  writeLines(
-    c(paste("cd", path %>% normalizePath(winslash = "/")), cmds),
-    bat
-  )
-  if (run) system(bat)
+  writeLines(cmds, file.path(path, file))
+  if (run) {
+    old_wd <- getwd()
+    setwd(path)
+    system(file)
+    setwd(old_wd)
+  }
 
 }
 
