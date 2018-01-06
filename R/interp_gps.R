@@ -48,7 +48,7 @@ interp_init <- function(path = ".") {
       res$PHOTO[nrow(res)], ")\n",
       " with above filenames in the \"name\" attribute.\n",
       " Save as \"input/approx.osm\".\n",
-      " Then run \"interp_gps()\" as many times as needed."
+      " Then run \"interp_josm()\" as many times as needed."
     )
   )
 

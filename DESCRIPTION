@@ -1,4 +1,4 @@
-Package: interpolexif
+Package: gpsinterp
 Type: Package
 Title: Interpolation of Longitude, Latitude and Direction with JOSM
 Version: 0.1.0
