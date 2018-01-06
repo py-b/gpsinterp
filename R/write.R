@@ -12,11 +12,11 @@ add_direction <- function() {
 
 # EXPORT pour EXIFTOOL ----------------------------------------------------
 
-#' Create a batch file for exiftool
+#' Writing exif tags with exiftool
 #'
 #' Create a batch file that contains \href{https://sno.phy.queensu.ca/~phil/exiftool/}{exiftool}
 #' commands to write computed longitudes, latitudes (and directions) in image
-#' files.
+#' files. Execute that file immediatly (or not if specified).
 #'
 #' In order to execute the batch file created by that function, \strong{exiftool}
 #' must be installed.
@@ -27,12 +27,14 @@ add_direction <- function() {
 #' @param file the name of the batch file (default : "write_exiftool.bat")
 #' @param direction should direction to next photo be calculated and included
 #'   in the file?
+#' @param run launch the batch file immediatly if \code{TRUE} (the default).
 #' @inheritParams interp_josm
 #' @export
 
-write_exiftool_bat <- function(path = ".",
-                               file = "write_exiftool.bat",
-                               direction = TRUE) {
+write_exiftool <- function(path = ".",
+                           file = "write_exiftool.bat",
+                           direction = TRUE,
+                           run = TRUE) {
 
   init_check()
 
@@ -49,7 +51,12 @@ write_exiftool_bat <- function(path = ".",
       )
     )
 
-  writeLines(cmds, file.path(path, file))
+  bat <- file.path(path, file)
+  writeLines(
+    c(paste("cd", path %>% normalizePath(winslash = "/")), cmds),
+    bat
+  )
+  if (run) system(bat)
 
 }
 
@@ -61,7 +68,7 @@ write_exiftool_bat <- function(path = ".",
 #' Write computed longitudes, latitudes (and directions) in a csv file.
 #' Images are not modified.
 #'
-#' @inheritParams write_exiftool_bat
+#' @inheritParams write_exiftool
 #' @param file the name of the csv file (default : "interp_gps.csv")
 #' @param ... other arguments passed to \code{write.csv}
 #' @export
