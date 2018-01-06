@@ -19,8 +19,10 @@ Suggests : testthat
 Description:
     Finds coordinates and direction (angle) of a sequence of photos with no GPS
     exif tags. In JOSM (Java editor for OpenStreetMap), manually identify points
-    that can be located exactly, then interpolate in-between points with R.  
-    Repeat the procedure until the approximation is good enough.	
+    that can be located exactly, then interpolate in-between points with R.
+    Repeat the procedure until the approximation is good enough.
+URL: http://github.com/the-knife/gpsinterp
+BugReports: http://github.com/the-knife/gpsinterp/issues
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
