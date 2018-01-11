@@ -10,11 +10,11 @@ Authors@R:
 	)
 Depends: R (>= 3.3)
 Imports:
-    dplyr,
-    purrr,
-    tibble,
-    tidyr,
-	xml2
+    dplyr (>= 0.7),
+    purrr (>= 0.2),
+    tibble (>= 1.4),
+    tidyr (>= 0.7),
+    xml2 (>= 1.1)
 Suggests : testthat
 Description:
     Finds coordinates and direction (angle) of a sequence of photos with no GPS
@@ -26,5 +26,5 @@ BugReports: http://github.com/the-knife/gpsinterp/issues
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
-SystemRequirements: JOSM, exiftool (optional)
+SystemRequirements: JOSM (required), exiftool (optional)
 RoxygenNote: 6.0.1
