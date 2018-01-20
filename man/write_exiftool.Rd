@@ -4,29 +4,23 @@
 \alias{write_exiftool}
 \title{Writing exif tags with exiftool}
 \usage{
-write_exiftool(path = ".", file = "write_exiftool.bat", direction = TRUE,
-  run = TRUE)
+write_exiftool(path = ".", direction = TRUE)
 }
 \arguments{
 \item{path}{(optional) path where input and output are located.
 This is not necessary if the working directory is already set to
 that location.}
 
-\item{file}{the name of the batch file (default : "write_exiftool.bat")}
-
 \item{direction}{should direction to next photo be calculated and included
 in the file?}
-
-\item{run}{launch the batch file immediatly if \code{TRUE} (the default).}
 }
 \description{
-Create a batch file that contains \href{https://sno.phy.queensu.ca/~phil/exiftool/}{exiftool}
+Runs \href{https://sno.phy.queensu.ca/~phil/exiftool/}{exiftool}
 commands to write computed longitudes, latitudes (and directions) in image
-files. Execute that file immediatly (or not if specified).
+files.
 }
 \details{
-In order to execute the batch file created by that function, \strong{exiftool}
-must be installed.
+In order to write image files, \strong{exiftool} must be installed.
 
 Files are not overwritten : a copy of the images including new exif tags
 are written in the \code{output} directory.

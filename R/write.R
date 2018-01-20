@@ -1,4 +1,4 @@
-# CALCUL ANGLE vers SUIVANT -----------------------------------------------
+# DIRECTION TO NEXT IMAGE -------------------------------------------------
 
 add_direction <- function() {
 
@@ -9,32 +9,26 @@ add_direction <- function() {
 
 }
 
-
-# EXPORT pour EXIFTOOL ----------------------------------------------------
+# EXIFTOOL ----------------------------------------------------------------
 
 #' Writing exif tags with exiftool
 #'
-#' Create a batch file that contains \href{https://sno.phy.queensu.ca/~phil/exiftool/}{exiftool}
+#' Runs \href{https://sno.phy.queensu.ca/~phil/exiftool/}{exiftool}
 #' commands to write computed longitudes, latitudes (and directions) in image
-#' files. Execute that file immediatly (or not if specified).
+#' files.
 #'
-#' In order to execute the batch file created by that function, \strong{exiftool}
-#' must be installed.
+#' In order to write image files, \strong{exiftool} must be installed.
 #'
 #' Files are not overwritten : a copy of the images including new exif tags
 #' are written in the \code{output} directory.
 #'
-#' @param file the name of the batch file (default : "write_exiftool.bat")
 #' @param direction should direction to next photo be calculated and included
 #'   in the file?
-#' @param run launch the batch file immediatly if \code{TRUE} (the default).
 #' @inheritParams interp_josm
 #' @export
 
 write_exiftool <- function(path = ".",
-                           file = "write_exiftool.bat",
-                           direction = TRUE,
-                           run = TRUE) {
+                           direction = TRUE) {
 
   init_check()
 
@@ -51,13 +45,13 @@ write_exiftool <- function(path = ".",
       )
     )
 
-  writeLines(cmds, file.path(path, file))
-  if (run) {
-    old_wd <- getwd()
-    setwd(path)
-    system(file)
-    setwd(old_wd)
+  old_wd <- getwd()
+  setwd(path)
+  for (cmd in cmds) {
+    cat(cmd, sep = "\n")
+    system(cmd)
   }
+  setwd(old_wd)
 
 }
 
