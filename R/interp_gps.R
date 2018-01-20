@@ -109,10 +109,13 @@ update_osm <- function(path = ".") {
   file_josm <- approx_file %>% normalizePath(winslash = "/")
   url_josm <- paste0("http://localhost:8111/open_file?filename=", file_josm)
   if (Sys.info()[["sysname"]] != "Windows") url_josm <- URLencode(url_josm)
-  download.file(
-    url_josm,
-    destfile = "ok.txt",
-    quiet = TRUE
+  tryCatch(
+    download.file(
+      url_josm,
+      destfile = "ok.txt",
+      quiet = TRUE
+    ),
+    error = function(e) message("Make sure JOSM is opened and remote control enabled.")
   )
   unlink("ok.txt")
 
