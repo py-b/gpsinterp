@@ -48,6 +48,15 @@ You can save latitude, longitude (and optionally direction) in a csv file. Once 
 
 If exiftool is installed on your system, you can write latitude, longitude (and optionally direction) into the images. Once the interpolation seems good enough, use the `write_exiftool` function.
 
+Local directory architecture
+----------------------------
+
+You need to create two directories **input** and **output** on your machine.
+
+-   Put the orignal images in **input/photos**.
+
+-   Geolocated photos will be written in **output**.
+
 Typical iterative process for interpolation
 -------------------------------------------
 
