@@ -98,6 +98,7 @@ interp_missing_coord <- function() {
 }
 
 #' @importFrom utils download.file
+#' @importFrom utils URLencode
 update_osm <- function(path = ".") {
 
   init_check()
