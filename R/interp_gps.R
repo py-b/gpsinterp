@@ -30,7 +30,8 @@ interp_init <- function(path = ".") {
     tibble::tibble(
       PHOTO = list.files(
         file.path(path, "input", "photos"),
-        pattern = "\\.JPG$" #jpg, jpeg
+        pattern = "\\.(JPE?G|PNG|BMP|GIF)$",
+        ignore.case = TRUE
       )
     )
 
