@@ -94,7 +94,7 @@ interp_josm()
 # Save
 write_exiftool()
   # or (if you don't have exiftool)
-write_coord_csv("my_geottaged_photos.csv")
+  write_coord_csv(file = "photos_coord.csv")
 
 # Cleanup (optional, see help page)
 interp_cleanup()
