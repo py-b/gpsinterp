@@ -61,6 +61,8 @@ Typical iterative process for interpolation
 -------------------------------------------
 
 ``` r
+setwd("path/where/input/and/output/are")
+
 # Initialize data
 interp_init()
 
@@ -68,6 +70,7 @@ interp_init()
 # (use the real names of the files)
 
 # Save as "approx.osm" in the input directory
+# (exact points are tagged as tourism=viepoint to distinguish them from interpolated ones)
 
 # Compute positions of missing points
 interp_josm()
