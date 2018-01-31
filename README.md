@@ -70,7 +70,6 @@ interp_init()
 # (use the real names of the files)
 
 # Save as "approx.osm" in the input directory
-# (exact points are tagged as tourism=viepoint to distinguish them from interpolated ones)
 
 # Compute positions of missing points
 interp_josm()
@@ -79,6 +78,7 @@ interp_josm()
 
 # 2/ Compute new positions
 interp_josm()
+# (exact points will automatically be tagged as tourism=viepoint to distinguish them from interpolated ones)
 
 # Repeat 1/ and 2/ as many times as needed
 
