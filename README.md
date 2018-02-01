@@ -61,6 +61,8 @@ Typical iterative process for interpolation
 -------------------------------------------
 
 ``` r
+library(gpsinterp)
+
 setwd("path/where/input/and/output/are")
 
 # Initialize data
@@ -80,7 +82,7 @@ interp_josm()
 interp_josm()
 # (exact points will automatically be tagged as tourism=viepoint to distinguish them from interpolated ones)
 
-# Repeat 1/ and 2/ as many times as needed
+# ....... Repeat 1/ and 2/ as many times as needed .......
 
 # Save
 write_exiftool()
