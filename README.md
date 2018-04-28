@@ -24,7 +24,7 @@ Other components to install
 
 ### *JOSM* (required)
 
-[JOSM](http://josm.openstreetmap.de) is an offline editor for OpenStreetMap. For this package, it is not used for uploading information to osm, but for manually locating exact points.
+[JOSM](http://josm.openstreetmap.de) is an offline editor for OpenStreetMap. For this package, it is not used for uploading information to osm, but for locating exact points manually.
 
 JOSM can display various aerial imageries and detect which points where moved by the user between two interpolations. *gpsinterp* will load local files in JOSM, therefore you have to enable the following options (in preferences menu) :
 
@@ -33,7 +33,7 @@ JOSM can display various aerial imageries and detect which points where moved by
 
 ### *exiftool* (optional)
 
-[exiftool](http://sno.phy.queensu.ca/~phil/exiftool/) is a command line for writing exif tags to photos. It only will be needed if you want to write computed information into image files (other export type are possible).
+[exiftool](http://sno.phy.queensu.ca/~phil/exiftool/) is a command line software for writing exif tags to photos. It only will be needed if you want to write computed information into image files (other export type are possible).
 
 On Linux, you can install exiftool with : `sudo apt install libimage-exiftool-perl`
 
@@ -68,6 +68,7 @@ setwd("path/where/input/and/output/are")
 # Initialize data
 interp_init()
 
+# Open JOSM.
 # Create a new JOSM layer with at least two nodes and tagged with name="photo_xxx.JPG"
 # (use the real names of the files)
 
