@@ -4,8 +4,7 @@
 \alias{write_coord_csv}
 \title{Write coordinates and direction in a csv file.}
 \usage{
-write_coord_csv(path = ".", file = "interp_gps.csv", direction = TRUE,
-  ...)
+write_coord_csv(path = ".", file = "interp_gps.csv", direction = TRUE, ...)
 }
 \arguments{
 \item{path}{(optional) path where input and output are located.
