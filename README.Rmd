@@ -78,8 +78,8 @@ setwd("path/where/input/and/output/are")
 interp_init()
 
 # Open JOSM.
-# Create a new JOSM layer with at least two nodes and tagged with name="photo_xxx.JPG"
-# (use the real names of the files)
+# Create a new JOSM layer with at least two nodes and tagged with
+# name="photo_xxx.JPG" (use the real names of the files)
 
 # Save as "approx.osm" in the input directory
 
@@ -90,7 +90,8 @@ interp_josm()
 
 # 2/ Compute new positions
 interp_josm()
-# (exact points will automatically be tagged as tourism=viepoint to distinguish them from interpolated ones)
+# (exact points will automatically be tagged as tourism=viepoint
+# to distinguish them from interpolated ones)
 
 # ....... Repeat 1/ and 2/ as many times as needed .......
 
