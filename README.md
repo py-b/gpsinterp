@@ -18,7 +18,7 @@ You can install **gpsinterp** from github with :
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("the-knife/gpsinterp")
+devtools::install_github("py-b/gpsinterp")
 ```
 
 Note : *on Windows*, you need to have
